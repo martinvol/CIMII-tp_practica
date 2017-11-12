@@ -54,13 +54,36 @@ class Brewer(QtGui.QMainWindow, brewer.Ui_Dialog):
         self.label_22.setPixmap(QPixmap("assets/tank.jpg"))
         self.label_23.setPixmap(QPixmap("assets/tank.jpg"))
         self.label_24.setPixmap(QPixmap("assets/tank.jpg"))
+        self.label_25.setPixmap(QPixmap("assets/tank.jpg"))
         
+        self.timer_count = 0 
+
+        self.pushButton.clicked.connect(self.open_manage)
+
         def tick():
-            print 'tick'
+            self.timer_count +=1
+            self.update_progress_bars(self.timer_count)
+            print 'tick', self.timer_count
+
+
 
         self.timer = QTimer()
         self.timer.timeout.connect(tick)
         self.timer.start(1000)
+
+        self.manager = Manager()
+
+    def open_manage(self):
+        self.manager.show()
+
+    def update_progress_bars(self, time):
+        # update once every 3 seconds
+        if time%3 == 0:
+            # everything is bounded to 100%
+            self.process_progress.setValue(self.process_progress.value()+1 if self.process_progress.value()+1 < 100 else 100)
+            self.process_progress_2.setValue(self.process_progress_2.value()+1 if self.process_progress_2.value()+1 < 100 else 100)
+            self.process_progress_3.setValue(self.process_progress_3.value()+1 if self.process_progress_3.value()+1 < 100 else 100)
+            self.process_progress_4.setValue(self.process_progress_4.value()+1 if self.process_progress_4.value()+1 < 100 else 100)
 
     def accept(self):
         pass
@@ -70,8 +93,8 @@ class Brewer(QtGui.QMainWindow, brewer.Ui_Dialog):
 
 def main():
     app = QtGui.QApplication(sys.argv)  # A new instance of QApplication
-    manager = Manager()                 # We set the form to be our ExampleApp (design)
-    manager.show()                         # Show the form
+                     # We set the form to be our ExampleApp (design)
+                             # Show the form
 
     setup = SetUp()
     setup.show()
