@@ -1,6 +1,9 @@
 from PyQt4 import QtGui # Import the PyQt4 module we'll need
 import sys # We need sys so that we can pass argv to QApplication
 
+from PyQt4.QtCore import *
+from PyQt4.QtGui import *
+
 #import app as app_design  # This file holds our MainWindow and all design related things
               # it also keeps events etc that we defined in Qt Designer
 
@@ -47,6 +50,17 @@ class Brewer(QtGui.QMainWindow, brewer.Ui_Dialog):
         super(self.__class__, self).__init__()
         self.setupUi(self)  # This is defined in design.py file automatically
                             # It sets up layout and widgets that are defined
+
+        self.label_22.setPixmap(QPixmap("assets/tank.jpg"))
+        self.label_23.setPixmap(QPixmap("assets/tank.jpg"))
+        self.label_24.setPixmap(QPixmap("assets/tank.jpg"))
+        
+        def tick():
+            print 'tick'
+
+        self.timer = QTimer()
+        self.timer.timeout.connect(tick)
+        self.timer.start(1000)
 
     def accept(self):
         pass
