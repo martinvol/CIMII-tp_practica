@@ -32,7 +32,7 @@ class MakeChart(object):
         plt.grid()
         
         plt.pause(0.001)
-        plt.show()
+        plt.show(block=True)
 
 
 
