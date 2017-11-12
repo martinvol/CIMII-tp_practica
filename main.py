@@ -59,6 +59,9 @@ def main():
     manager = Manager()                 # We set the form to be our ExampleApp (design)
     manager.show()                         # Show the form
 
+    setup = SetUp()
+    setup.show()
+
     brewer = Brewer()
     brewer.show()
 
