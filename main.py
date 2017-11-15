@@ -8,7 +8,7 @@ from PyQt4.QtGui import *
               # it also keeps events etc that we defined in Qt Designer
 
 import manager, setup, brewer
-
+import random
 
 import matplotlib.pyplot as plt
 class MakeChart(object):
@@ -92,9 +92,8 @@ class Brewer(QtGui.QMainWindow, brewer.Ui_Dialog):
         def tick():
             self.timer_count +=1
             self.update_progress_bars(self.timer_count)
+            self.update_indicators()
             print 'tick', self.timer_count
-
-
 
         self.timer = QTimer()
         self.timer.timeout.connect(tick)
@@ -113,6 +112,32 @@ class Brewer(QtGui.QMainWindow, brewer.Ui_Dialog):
             self.process_progress_2.setValue(self.process_progress_2.value()+1 if self.process_progress_2.value()+1 < 100 else 100)
             self.process_progress_3.setValue(self.process_progress_3.value()+1 if self.process_progress_3.value()+1 < 100 else 100)
             self.process_progress_4.setValue(self.process_progress_4.value()+1 if self.process_progress_4.value()+1 < 100 else 100)
+
+    def update_indicators(self):
+        # boiler
+        self.temp_lcd.display(str(float(self.temp_lcd.value()) + random.choice([-.5, .5])))
+        # pressure
+        self.pressure_lcd.display(str(float(self.pressure_lcd.value()) + random.choice([-.5, .5])))
+        # level -> wont stop growing, will raise an alarm
+        self.level_lcd.display(str(float(self.level_lcd.value()) + random.choice([.5, 1])))
+        
+        if self.level_lcd.value() > 20:
+            self.raise_modal(message="El nivel es muy alto", value=self.level_lcd.value())
+        # Density
+        self.density_lcd.display(str(float(self.density_lcd.value()) + random.choice([-.5, .5])))
+
+    def raise_modal(self, message, value):
+        print("show message")
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+
+        msg.setWindowTitle("Alerta")
+        msg.setText("Una valor esta fuera de lo esperado")
+        msg.setInformativeText(message + " :" + str(value))
+        msg.setDetailedText("Sensor puede estar defectuoso")
+        msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        # msg.show()
+        msg.exec_()
 
     def accept(self):
         pass

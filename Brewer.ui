@@ -494,7 +494,7 @@
      <string>Pressure</string>
     </property>
    </widget>
-   <widget class="QLCDNumber" name="oressure_lcd">
+   <widget class="QLCDNumber" name="pressure_lcd">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -2455,14 +2455,14 @@
   <widget class="QLabel" name="label_26">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>40</x>
      <y>410</y>
-     <width>68</width>
-     <height>17</height>
+     <width>181</width>
+     <height>51</height>
     </rect>
    </property>
    <property name="text">
-    <string>Stage 1</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stage 1 -&lt;br/&gt;Calentamiento con malta&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_27">
@@ -2475,7 +2475,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Stage 2</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stage 2 - &lt;/p&gt;&lt;p&gt;Obtención de mosto&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_28">
@@ -2483,12 +2483,12 @@
     <rect>
      <x>50</x>
      <y>520</y>
-     <width>121</width>
+     <width>181</width>
      <height>141</height>
     </rect>
    </property>
    <property name="text">
-    <string>Stage 3</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Stage 3 -&lt;br/&gt;Herbido de mosto + lupulo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_29">
@@ -2501,7 +2501,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Etapa 4</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Etapa 4-&lt;/p&gt;&lt;p&gt;Obtención de gas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_2">
