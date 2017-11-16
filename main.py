@@ -14,8 +14,8 @@ import setup
 
 
 class MakeChart(object):
-    def __init__(self):
-        temps = [10, 5, 9, 4, 10, 8, 6, 8, 6, 7, 4, 8, 5, 9, 8, 7, 5, 5, 7, 5, 8, 6, 8, 7, 7, 5, 5, 6, 8, 8, 9, 6, 9]
+    def __init__(self, title, x_label, y_label, lower_bound, upper_bound):
+        values = [random.randrange(lower_bound, upper_bound) for _ in range(35)]
 
         def average(grades):
             return sum(grades) / len(grades)
@@ -27,10 +27,11 @@ class MakeChart(object):
             return out
 
         plt.ion()
-        plt.plot(generate_average(temps))
+        plt.plot(generate_average(values))
         plt.pause(0.001)
-        plt.ylabel('Temperature')
-        plt.xlabel('Time')
+        plt.title(title)
+        plt.ylabel(y_label)
+        plt.xlabel(x_label)
         plt.grid()
 
         plt.pause(0.001)
@@ -96,20 +97,36 @@ class Brewer(QtGui.QMainWindow, brewer.Ui_Dialog):
         self.timer_count = 0
 
         self.pushButton.clicked.connect(self.open_manage)
-        self.pushButton_2.clicked.connect(lambda: MakeChart())
+        self.pushButton_2.clicked.connect(self.open_reports)
 
         def tick():
             self.timer_count += 1
             self.update_progress_bars(self.timer_count)
             self.update_indicators()
-            print
-            'tick', self.timer_count
+            # print 'tick', self.timer_count
 
         self.timer = QTimer()
         self.timer.timeout.connect(tick)
         self.timer.start(1000)
 
         self.manager = Manager()
+
+        self.raised_a = False
+        self.raised_b = False
+
+        self.raised_1 = False
+        self.raised_2 = False
+        self.raised_3 = False
+        self.raised_4 = False
+
+    def open_reports(self):
+        self.hide()
+        self.timer.stop()
+        MakeChart("Temperatures Stage 2", "Minutes from start", "Temperature", 20, 28)
+        MakeChart("Level Stage 2", "Minutes from start", "Lts", 20, 1000)
+        MakeChart("Pressure Stage 2", "Minutes from start", "Lts", 5,6)
+        self.show()
+        self.timer.start(1000)
 
     def open_manage(self):
         self.manager.show()
@@ -127,6 +144,38 @@ class Brewer(QtGui.QMainWindow, brewer.Ui_Dialog):
             self.process_progress_4.setValue(
                     self.process_progress_4.value() + 1 if self.process_progress_4.value() + 1 < 100 else 100)
 
+            if self.process_progress.value() == 100 and not self.raised_1:
+                self.raise_modal(title="Notificacion",
+                                 text="Un proceso de fabricacion termino",
+                                 value=1,
+                                 detail="El resultado del proceso 1 ya esta disponible para descargar.",
+                                 message="Proceso finalizado: ")
+                self.raised_1 = True
+
+            if self.process_progress_2.value() == 100 and not self.raised_2:
+                self.raise_modal(title="Notificacion",
+                                 text="Un proceso de fabricacion termino",
+                                 value=2,
+                                 detail="El resultado del proceso 2 ya esta disponible para descargar.",
+                                 message="Proceso finalizado: ")
+                self.raised_2 = True
+
+            if self.process_progress_3.value() == 100 and not self.raised_3:
+                self.raise_modal(title="Notificacion",
+                                 text="Un proceso de fabricacion termino",
+                                 value=3,
+                                 detail="El resultado del proceso 3 ya esta disponible para descargar.",
+                                 message="Proceso finalizado: ")
+                self.raised_3 = True
+
+            if self.process_progress_4.value() == 100 and not self.raised_4:
+                self.raise_modal(title="Notificacion",
+                                 text="Un proceso de fabricacion termino",
+                                 value=4,
+                                 detail="El resultado del proceso 4 ya esta disponible para descargar.",
+                                 message="Proceso finalizado: ")
+                self.raised_4 = True
+
     def update_indicators(self):
         # boiler
         self.temp_lcd.display(str(float(self.temp_lcd.value()) + random.choice([-.2, .3])))
@@ -135,29 +184,35 @@ class Brewer(QtGui.QMainWindow, brewer.Ui_Dialog):
         # level -> wont stop growing, will raise an alarm
         self.level_lcd.display(str(float(self.level_lcd.value()) + random.choice([.5, .8])))
 
-        if 20 < self.level_lcd.value() < 25:
+        if 20 < self.level_lcd.value() < 25 and not self.raised_a:
             self.raise_modal(message="El nivel es muy alto",
                              value=self.level_lcd.value(),
-                             detail="Compruebe la carga, nivel critico")
+                             detail="Compruebe la carga, nivel critico",
+                             title="Alerta",
+                             text="Un valor esta fuera de lo esperado")
             palette = self.level_lcd.palette()
             palette.setColor(self.level_lcd.backgroundRole(), QtGui.QColor('yellow'))
             self.level_lcd.paletteChange(palette)
             self.level_lcd.setAutoFillBackground(True)
-        if 25 < self.level_lcd.value() < 28:
+            self.raised_a = True
+        if 25 < self.level_lcd.value() < 28 and not self.raised_b:
             self.raise_modal(message="El nivel es anormal",
                              value=self.level_lcd.value(),
-                             detail="Nivel fuera de lo comun. Compruebe el sensor")
+                             detail="Nivel fuera de lo comun. Compruebe el sensor",
+                             title="Alerta",
+                             text="Un valor esta muy fuera de rango")
             self.level_lcd.setDisabled(True)
+            self.raised_b = True
         # Density
         self.density_lcd.display(str(int(self.density_lcd.value()) + random.choice([-1, 1])))
 
-    def raise_modal(self, message, value, detail):
-        print("show message")
+    def raise_modal(self,title,text, message, value, detail):
+        #print("show message")
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
 
-        msg.setWindowTitle("Alerta")
-        msg.setText("Un valor esta fuera de lo esperado")
+        msg.setWindowTitle(title)
+        msg.setText(text)
         msg.setInformativeText(message + " :" + str(value))
         msg.setDetailedText(detail)
         msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
@@ -180,9 +235,6 @@ def main():
 
     setup = SetUp()
     setup.show()
-
-    # brewer = Brewer()
-    # brewer.show()
 
     app.exec_()  # and execute the app
 
