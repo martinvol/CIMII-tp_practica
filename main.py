@@ -111,6 +111,9 @@ class Brewer(QtGui.QMainWindow, brewer.Ui_Dialog):
 
         self.manager = Manager()
 
+        self.alert_raise_level1 = False
+        self.alert_raise_level2 = False
+
     def open_manage(self):
         self.manager.show()
 
@@ -135,7 +138,7 @@ class Brewer(QtGui.QMainWindow, brewer.Ui_Dialog):
         # level -> wont stop growing, will raise an alarm
         self.level_lcd.display(str(float(self.level_lcd.value()) + random.choice([.5, .8])))
 
-        if 20 < self.level_lcd.value() < 25:
+        if 20 < self.level_lcd.value() < 25 and not self.alert_raise_level1:
             self.raise_modal(message="El nivel es muy alto",
                              value=self.level_lcd.value(),
                              detail="Compruebe la carga, nivel critico")
@@ -143,11 +146,13 @@ class Brewer(QtGui.QMainWindow, brewer.Ui_Dialog):
             palette.setColor(self.level_lcd.backgroundRole(), QtGui.QColor('yellow'))
             self.level_lcd.paletteChange(palette)
             self.level_lcd.setAutoFillBackground(True)
-        if 25 < self.level_lcd.value() < 28:
+            self.alert_raise_level1 = True
+        if 25 < self.level_lcd.value() < 28 and not self.alert_raise_level2:
             self.raise_modal(message="El nivel es anormal",
                              value=self.level_lcd.value(),
                              detail="Nivel fuera de lo comun. Compruebe el sensor")
             self.level_lcd.setDisabled(True)
+            self.alert_raise_level2 = True
         # Density
         self.density_lcd.display(str(int(self.density_lcd.value()) + random.choice([-1, 1])))
 
