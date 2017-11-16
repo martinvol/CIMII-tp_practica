@@ -8,8 +8,6 @@ from PyQt4.QtGui import *
 
 # import app as app_design  # This file holds our MainWindow and all design related things
 # it also keeps events etc that we defined in Qt Designer
-from PyQt4.uic.properties import QtCore
-
 import brewer
 import manager
 import setup
@@ -66,6 +64,12 @@ class SetUp(QtGui.QMainWindow, setup.Ui_Dialog):
         self.setupUi(self)  # This is defined in design.py file automatically
         # It sets up layout and widgets that are defined
 
+        self.pushButton_2.clicked.connect(self.open_brewer)
+
+    def open_brewer(self):
+        Brewer().show()
+        self.hide()
+
     def accept(self):
         pass
 
@@ -88,7 +92,7 @@ class Brewer(QtGui.QMainWindow, brewer.Ui_Dialog):
         self.label_24.setPixmap(QPixmap("assets/tank.jpg"))
         self.label_25.setPixmap(QPixmap("assets/tank.jpg"))
 
-        self.label_30.setPixmap(QPixmap("assets/logo.png").scaled(320,80))
+        self.label_30.setPixmap(QPixmap("assets/logo.png").scaled(320, 80))
         self.timer_count = 0
 
         self.pushButton.clicked.connect(self.open_manage)
@@ -98,7 +102,8 @@ class Brewer(QtGui.QMainWindow, brewer.Ui_Dialog):
             self.timer_count += 1
             self.update_progress_bars(self.timer_count)
             self.update_indicators()
-            print 'tick', self.timer_count
+            print
+            'tick', self.timer_count
 
         self.timer = QTimer()
         self.timer.timeout.connect(tick)
@@ -114,36 +119,47 @@ class Brewer(QtGui.QMainWindow, brewer.Ui_Dialog):
         if time % 3 == 0:
             # everything is bounded to 100%
             self.process_progress.setValue(
-                self.process_progress.value() + 1 if self.process_progress.value() + 1 < 100 else 100)
+                    self.process_progress.value() + 1 if self.process_progress.value() + 1 < 100 else 100)
             self.process_progress_2.setValue(
-                self.process_progress_2.value() + 1 if self.process_progress_2.value() + 1 < 100 else 100)
+                    self.process_progress_2.value() + 1 if self.process_progress_2.value() + 1 < 100 else 100)
             self.process_progress_3.setValue(
-                self.process_progress_3.value() + 1 if self.process_progress_3.value() + 1 < 100 else 100)
+                    self.process_progress_3.value() + 1 if self.process_progress_3.value() + 1 < 100 else 100)
             self.process_progress_4.setValue(
-                self.process_progress_4.value() + 1 if self.process_progress_4.value() + 1 < 100 else 100)
+                    self.process_progress_4.value() + 1 if self.process_progress_4.value() + 1 < 100 else 100)
 
     def update_indicators(self):
         # boiler
-        self.temp_lcd.display(str(float(self.temp_lcd.value()) + random.choice([-.5, .5])))
+        self.temp_lcd.display(str(float(self.temp_lcd.value()) + random.choice([-.2, .3])))
         # pressure
-        self.pressure_lcd.display(str(float(self.pressure_lcd.value()) + random.choice([-.5, .5])))
+        self.pressure_lcd.display(str(float(self.pressure_lcd.value()) + random.choice([-.1, .1])))
         # level -> wont stop growing, will raise an alarm
-        self.level_lcd.display(str(float(self.level_lcd.value()) + random.choice([.5, 1])))
+        self.level_lcd.display(str(float(self.level_lcd.value()) + random.choice([.5, .8])))
 
-        if self.level_lcd.value() > 20:
-            self.raise_modal(message="El nivel es muy alto", value=self.level_lcd.value())
+        if 20 < self.level_lcd.value() < 25:
+            self.raise_modal(message="El nivel es muy alto",
+                             value=self.level_lcd.value(),
+                             detail="Compruebe la carga, nivel critico")
+            palette = self.level_lcd.palette()
+            palette.setColor(self.level_lcd.backgroundRole(), QtGui.QColor('yellow'))
+            self.level_lcd.paletteChange(palette)
+            self.level_lcd.setAutoFillBackground(True)
+        if 25 < self.level_lcd.value() < 28:
+            self.raise_modal(message="El nivel es anormal",
+                             value=self.level_lcd.value(),
+                             detail="Nivel fuera de lo comun. Compruebe el sensor")
+            self.level_lcd.setDisabled(True)
         # Density
-        self.density_lcd.display(str(float(self.density_lcd.value()) + random.choice([-.5, .5])))
+        self.density_lcd.display(str(int(self.density_lcd.value()) + random.choice([-1, 1])))
 
-    def raise_modal(self, message, value):
+    def raise_modal(self, message, value, detail):
         print("show message")
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
 
         msg.setWindowTitle("Alerta")
-        msg.setText("Una valor esta fuera de lo esperado")
+        msg.setText("Un valor esta fuera de lo esperado")
         msg.setInformativeText(message + " :" + str(value))
-        msg.setDetailedText("Sensor puede estar defectuoso")
+        msg.setDetailedText(detail)
         msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
         # msg.show()
         msg.exec_()
@@ -165,8 +181,8 @@ def main():
     setup = SetUp()
     setup.show()
 
-    brewer = Brewer()
-    brewer.show()
+    # brewer = Brewer()
+    # brewer.show()
 
     app.exec_()  # and execute the app
 

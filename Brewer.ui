@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>830</width>
+    <width>819</width>
     <height>534</height>
    </rect>
   </property>
@@ -994,8 +994,8 @@
        <colorrole role="Button">
         <brush brushstyle="SolidPattern">
          <color alpha="255">
-          <red>0</red>
-          <green>148</green>
+          <red>232</red>
+          <green>232</green>
           <blue>0</blue>
          </color>
         </brush>
@@ -1012,8 +1012,8 @@
        <colorrole role="Midlight">
         <brush brushstyle="SolidPattern">
          <color alpha="255">
-          <red>0</red>
-          <green>185</green>
+          <red>232</red>
+          <green>232</green>
           <blue>0</blue>
          </color>
         </brush>
@@ -1131,8 +1131,8 @@
        <colorrole role="Button">
         <brush brushstyle="SolidPattern">
          <color alpha="255">
-          <red>0</red>
-          <green>148</green>
+          <red>232</red>
+          <green>232</green>
           <blue>0</blue>
          </color>
         </brush>
@@ -1149,8 +1149,8 @@
        <colorrole role="Midlight">
         <brush brushstyle="SolidPattern">
          <color alpha="255">
-          <red>0</red>
-          <green>185</green>
+          <red>232</red>
+          <green>232</green>
           <blue>0</blue>
          </color>
         </brush>
@@ -1268,8 +1268,8 @@
        <colorrole role="Button">
         <brush brushstyle="SolidPattern">
          <color alpha="255">
-          <red>0</red>
-          <green>148</green>
+          <red>232</red>
+          <green>232</green>
           <blue>0</blue>
          </color>
         </brush>
@@ -1286,8 +1286,8 @@
        <colorrole role="Midlight">
         <brush brushstyle="SolidPattern">
          <color alpha="255">
-          <red>0</red>
-          <green>185</green>
+          <red>232</red>
+          <green>232</green>
           <blue>0</blue>
          </color>
         </brush>
@@ -1887,7 +1887,7 @@
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
-     <x>640</x>
+     <x>620</x>
      <y>20</y>
      <width>171</width>
      <height>80</height>
@@ -2303,7 +2303,7 @@
   <widget class="QGroupBox" name="groupBox_6">
    <property name="geometry">
     <rect>
-     <x>640</x>
+     <x>620</x>
      <y>90</y>
      <width>171</width>
      <height>80</height>
@@ -2329,7 +2329,7 @@
   <widget class="QGroupBox" name="groupBox_7">
    <property name="geometry">
     <rect>
-     <x>640</x>
+     <x>620</x>
      <y>160</y>
      <width>171</width>
      <height>80</height>
@@ -2355,7 +2355,7 @@
   <widget class="QGroupBox" name="groupBox_8">
    <property name="geometry">
     <rect>
-     <x>640</x>
+     <x>620</x>
      <y>230</y>
      <width>171</width>
      <height>80</height>
@@ -2397,7 +2397,7 @@
   <widget class="QLabel" name="label_23">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>220</x>
      <y>380</y>
      <width>181</width>
      <height>141</height>
@@ -2413,7 +2413,7 @@
   <widget class="QLabel" name="label_24">
    <property name="geometry">
     <rect>
-     <x>430</x>
+     <x>420</x>
      <y>380</y>
      <width>181</width>
      <height>141</height>
@@ -2429,7 +2429,7 @@
   <widget class="QLabel" name="label_25">
    <property name="geometry">
     <rect>
-     <x>630</x>
+     <x>620</x>
      <y>380</y>
      <width>181</width>
      <height>141</height>
@@ -2452,46 +2452,46 @@
     </rect>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Stage 1&lt;br/&gt;Calentamiento con malta&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Stage 2&lt;br/&gt;Malt Infusion&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_27">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>220</x>
      <y>330</y>
      <width>181</width>
      <height>51</height>
     </rect>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Stage 2&lt;br/&gt;Obtención de mosto&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Stage 4&lt;br/&gt;Must Boiling&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_28">
    <property name="geometry">
     <rect>
-     <x>430</x>
+     <x>410</x>
      <y>330</y>
      <width>181</width>
      <height>51</height>
     </rect>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Stage 3&lt;br/&gt;Herbido de mosto + lupulo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Stage 5&lt;br/&gt;Yeast Add&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_29">
    <property name="geometry">
     <rect>
-     <x>630</x>
+     <x>620</x>
      <y>330</y>
      <width>181</width>
      <height>51</height>
     </rect>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Stage 4&lt;br/&gt;Obtención de gas&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Stage 6&lt;br/&gt;Fermentation&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_2">
