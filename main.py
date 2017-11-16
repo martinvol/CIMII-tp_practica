@@ -160,6 +160,9 @@ def main():
     # We set the form to be our ExampleApp (design)
     # Show the form
 
+    app = QtGui.QApplication(sys.argv)
+    app.setStyle(QtGui.QStyleFactory.create("plastique"))
+
     setup = SetUp()
     setup.show()
 
