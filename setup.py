@@ -231,7 +231,7 @@ class Ui_Dialog(object):
         self.label.setObjectName(_fromUtf8("label"))
 
         self.retranslateUi(Dialog)
-        self.toolBox.setCurrentIndex(4)
+        self.toolBox.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
     def retranslateUi(self, Dialog):
